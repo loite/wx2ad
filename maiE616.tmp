@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://b0msr53wlo5wh"]
+
+[ext_resource type="Texture2D" uid="uid://do4xb88bbnq01" path="res://Textures/map.png" id="1_ekguk"]
+[ext_resource type="Texture2D" uid="uid://dukb6sd2xr3b0" path="res://Textures/yellow_triangle.png" id="2_5bgo7"]
+[ext_resource type="Script" path="res://Script/Player.gd" id="2_glfrl"]
+[ext_resource type="PackedScene" uid="uid://mtxut7h75drt" path="res://Enemy.tscn" id="4_12a48"]
+[ext_resource type="Script" path="res://Script/EnemySpawner.gd" id="6_y6jva"]
+[ext_resource type="Script" path="res://Script/GameManager.gd" id="7_cc07q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_860km"]
+size = Vector2(30, 36)
+
+[node name="Main" type="Node2D"]
+
+[node name="Map" type="Sprite2D" parent="."]
+position = Vector2(759, 311)
+texture = ExtResource("1_ekguk")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(221, 91)
+script = ExtResource("2_glfrl")
+
+[node name="body" type="Sprite2D" parent="Player"]
+scale = Vector2(3.75, 4.625)
+texture = ExtResource("2_5bgo7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+visible = false
+shape = SubResource("RectangleShape2D_860km")
+
+[node name="Area2D" type="Area2D" parent="Player"]
+
+[node name="Enemy" parent="." instance=ExtResource("4_12a48")]
+
+[node name="EnemySpawner" type="Timer" parent="."]
+script = ExtResource("6_y6jva")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("7_cc07q")
